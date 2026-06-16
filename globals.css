@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-bebas-neue);
+  --font-mono: var(--font-geist-mono);
+  --color-pitch: #0A0F0D;
+  --color-surface: #111714;
+  --color-surface-raised: #1A2118;
+  --color-accent-green: #39FF14;
+  --color-accent-dim: #1E8C0A;
+  --color-text-primary: #F0F4F0;
+  --color-text-muted: #6B7A6B;
+  --color-border-dark: #1F2B1F;
+  --color-danger: #FF3B3B;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: #0A0F0D;
+  --foreground: #F0F4F0;
+  --card: #111714;
+  --card-foreground: #F0F4F0;
+  --popover: #111714;
+  --popover-foreground: #F0F4F0;
+  --primary: #39FF14;
+  --primary-foreground: #0A0F0D;
+  --secondary: #1A2118;
+  --secondary-foreground: #F0F4F0;
+  --muted: #1A2118;
+  --muted-foreground: #6B7A6B;
+  --accent: #1E8C0A;
+  --accent-foreground: #F0F4F0;
+  --destructive: #FF3B3B;
+  --border: #1F2B1F;
+  --input: #1F2B1F;
+  --ring: #39FF14;
+  --chart-1: #39FF14;
+  --chart-2: #1E8C0A;
+  --chart-3: #39FF14;
+  --chart-4: #6B7A6B;
+  --chart-5: #F0F4F0;
+  --sidebar: #111714;
+  --sidebar-foreground: #F0F4F0;
+  --sidebar-primary: #39FF14;
+  --sidebar-primary-foreground: #0A0F0D;
+  --sidebar-accent: #1A2118;
+  --sidebar-accent-foreground: #F0F4F0;
+  --sidebar-border: #1F2B1F;
+  --sidebar-ring: #39FF14;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-pitch text-text-primary;
+    font-family: var(--font-inter), sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-bebas-neue), sans-serif;
+  }
+}
+
+/* Scan-line hover effect on video cards */
+@keyframes scan-line {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 110%;
+  }
+}
+
+.video-card-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #39FF14, transparent);
+  box-shadow: 0 0 12px 2px rgba(57, 255, 20, 0.6);
+  top: -10%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.video-card:hover .video-card-scan-line {
+  opacity: 1;
+  animation: scan-line 0.8s ease-in-out;
+}
+
+/* Glow border on hover */
+.video-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.3), 0 0 0 1px rgba(57, 255, 20, 0.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0F0D;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F2B1F;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2A3B2A;
+}
+
+/* Category filter horizontal scroll */
+.category-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Shake animation for wrong password */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
